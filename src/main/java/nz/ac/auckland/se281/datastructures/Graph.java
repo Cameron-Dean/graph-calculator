@@ -95,9 +95,44 @@ public class Graph<T extends Comparable<T>> {
     return false;
   }
 
+  /**
+   * Returns true if for every vertex a, b, c in the set of vertices, if (a, b) and (b, c) are in
+   * the set of edges then (a, c) is in the set of edges.
+   *
+   * @return True if the graph is transitive
+   */
   public boolean isTransitive() {
     // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    // throw new UnsupportedOperationException();
+    for (Edge<T> edgeA : edges) {
+      for (Edge<T> edgeB : edges) {
+        if (edgeA.getDestination().equals(edgeB.getSource())
+            && !transitiveEdgeExists(edgeA, edgeB)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Helper function to determine whether there is an edge originating from the vertex edgeA
+   * originates from and points to the vertex edgeB points to.
+   *
+   * @param edgeA The edge (a, b) in the set of edges.
+   * @param edgeB The edge (b, c) in the set of edges.
+   * @return True if the edge (a, c) exists within the set of edges.
+   */
+  private boolean transitiveEdgeExists(Edge<T> edgeA, Edge<T> edgeB) {
+    for (Edge<T> edge : edges) {
+      if (edge.getSource().equals(edgeA.getSource())
+          && edge.getDestination().equals(edgeB.getDestination())) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public boolean isAntiSymmetric() {
