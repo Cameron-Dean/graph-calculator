@@ -4,14 +4,21 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * A graph that is composed of a set of verticies and edges.
+ * A graph that is composed of a set of vertices and edges.
  *
  * <p>You must NOT change the signature of the existing methods or constructor of this class.
  *
  * @param <T> The type of each vertex, that have a total ordering.
  */
 public class Graph<T extends Comparable<T>> {
-  public Graph(Set<T> verticies, Set<Edge<T>> edges) {}
+
+  private Set<T> vertices;
+  private Set<Edge<T>> edges;
+
+  public Graph(Set<T> vertices, Set<Edge<T>> edges) {
+    this.vertices = vertices;
+    this.edges = edges;
+  }
 
   public Set<T> getRoots() {
     // TODO: Task 1.

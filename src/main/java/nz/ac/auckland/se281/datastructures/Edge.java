@@ -8,5 +8,36 @@ package nz.ac.auckland.se281.datastructures;
  * @param <T> The type of each vertex.
  */
 public class Edge<T> {
-  public Edge(T source, T destination) {}
+
+  private T source;
+  private T destination;
+
+  /**
+   * Creates a new Edge.
+   *
+   * @param source Vertex edge originates from.
+   * @param destination Vertex edge points to.
+   */
+  public Edge(T source, T destination) {
+    this.source = source;
+    this.destination = destination;
+  }
+
+  /**
+   * Returns the source vertex of the current edge.
+   *
+   * @return The vertex the edge originates from.
+   */
+  public T getSource() {
+    return this.source;
+  }
+
+  /**
+   * Returns the destination vertex of the current edge.
+   *
+   * @return The vertex the edge points to.
+   */
+  public T getDestination() {
+    return this.destination;
+  }
 }
