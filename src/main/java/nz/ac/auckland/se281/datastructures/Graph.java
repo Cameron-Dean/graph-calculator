@@ -61,9 +61,38 @@ public class Graph<T extends Comparable<T>> {
     return nonReflexiveVertices.isEmpty();
   }
 
+  /**
+   * Returns true if for every vertex a, b in the set of vertices, if (a, b) are in the set of edges
+   * then (b, a) is in the set of edges.
+   *
+   * @return True if the graph is symmetric.
+   */
   public boolean isSymmetric() {
-    // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    for (Edge<T> edge : edges) {
+      if (!reverseEdgeExists(edge)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Helper function to check whether the edge going in the opposite direction exists when given a
+   * directed edge.
+   *
+   * @param edgeToCheck The edge that may or may not have a reverse included in the graph.
+   * @return True if the reverse edge to the input edge exists within the graph
+   */
+  private boolean reverseEdgeExists(Edge<T> edgeToCheck) {
+    for (Edge<T> edge : edges) {
+      if (edge.getSource().equals(edgeToCheck.getDestination())
+          && edge.getDestination().equals(edgeToCheck.getSource())) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public boolean isTransitive() {
