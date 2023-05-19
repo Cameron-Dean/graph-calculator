@@ -153,9 +153,13 @@ public class Graph<T extends Comparable<T>> {
     return true;
   }
 
+  /**
+   * Returns true if the graph is reflexive, symmetric, and transitive.
+   *
+   * @return True if the graph is an equivalence relation.
+   */
   public boolean isEquivalence() {
-    // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    return isReflexive() && isSymmetric() && isTransitive();
   }
 
   public Set<T> getEquivalenceClass(T vertex) {
