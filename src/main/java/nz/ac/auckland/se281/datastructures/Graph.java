@@ -44,9 +44,21 @@ public class Graph<T extends Comparable<T>> {
     return roots;
   }
 
+  /**
+   * Returns true if every vertex in the graph has a self-loop.
+   *
+   * @return True if the graph is reflexive.
+   */
   public boolean isReflexive() {
-    // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    Set<T> nonReflexiveVertices = new HashSet<>(vertices);
+
+    for (Edge<T> edge : edges) {
+      if (edge.getSource().equals(edge.getDestination())) {
+        nonReflexiveVertices.remove(edge.getSource());
+      }
+    }
+
+    return nonReflexiveVertices.isEmpty();
   }
 
   public boolean isSymmetric() {
