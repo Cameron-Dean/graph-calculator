@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281.datastructures;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,14 +16,32 @@ public class Graph<T extends Comparable<T>> {
   private Set<T> vertices;
   private Set<Edge<T>> edges;
 
+  /**
+   * Creates a new graph.
+   *
+   * @param vertices The set of vertices in the graph.
+   * @param edges The set of edges in the graph.
+   */
   public Graph(Set<T> vertices, Set<Edge<T>> edges) {
     this.vertices = vertices;
     this.edges = edges;
   }
 
+  /**
+   * Returns a set of the vertices in the graph that have either degree 0 or self loops.
+   *
+   * @return Root vertices of the graph.
+   */
   public Set<T> getRoots() {
-    // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    Set<T> roots = new HashSet<>(vertices);
+
+    for (Edge<T> edge : edges) {
+      if (!edge.getDestination().equals(edge.getSource())) {
+        roots.remove(edge.getDestination());
+      }
+    }
+
+    return roots;
   }
 
   public boolean isReflexive() {
