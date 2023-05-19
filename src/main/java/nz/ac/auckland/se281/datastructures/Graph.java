@@ -82,7 +82,7 @@ public class Graph<T extends Comparable<T>> {
    * directed edge.
    *
    * @param edgeToCheck The edge that may or may not have a reverse included in the graph.
-   * @return True if the reverse edge to the input edge exists within the graph
+   * @return True if the reverse edge to the input edge exists within the graph.
    */
   private boolean reverseEdgeExists(Edge<T> edgeToCheck) {
     for (Edge<T> edge : edges) {
@@ -99,11 +99,9 @@ public class Graph<T extends Comparable<T>> {
    * Returns true if for every vertex a, b, c in the set of vertices, if (a, b) and (b, c) are in
    * the set of edges then (a, c) is in the set of edges.
    *
-   * @return True if the graph is transitive
+   * @return True if the graph is transitive.
    */
   public boolean isTransitive() {
-    // TODO: Task 1.
-    // throw new UnsupportedOperationException();
     for (Edge<T> edgeA : edges) {
       for (Edge<T> edgeB : edges) {
         if (edgeA.getDestination().equals(edgeB.getSource())
@@ -135,9 +133,24 @@ public class Graph<T extends Comparable<T>> {
     return false;
   }
 
+  /**
+   * Returns true if for every vertex a, b in the set of vertices, if (a, b) and (b, a) are in the
+   * set of edges then (a = b).
+   *
+   * @return True if the graph if antisymmetric.
+   */
   public boolean isAntiSymmetric() {
-    // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    for (Edge<T> edgeA : edges) {
+      for (Edge<T> edgeB : edges) {
+        if (edgeA.getSource().equals(edgeB.getDestination())
+            && edgeA.getDestination().equals(edgeB.getSource())
+            && !edgeA.getSource().equals(edgeB.getSource())) {
+          return false;
+        }
+      }
+    }
+
+    return true;
   }
 
   public boolean isEquivalence() {
