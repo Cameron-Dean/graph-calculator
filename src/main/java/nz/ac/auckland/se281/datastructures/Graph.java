@@ -28,20 +28,44 @@ public class Graph<T extends Comparable<T>> {
   }
 
   /**
-   * Returns a set of the vertices in the graph that have either degree 0 or self loops.
+   * Returns a set of the vertices in the graph that have either degree 0 or are in an equivalence
+   * class. If in an equivalence class, the vertex with the least value will be returned in the set
+   * of vertices.
    *
    * @return Root vertices of the graph.
    */
   public Set<T> getRoots() {
-    Set<T> roots = new HashSet<>(vertices);
+    Set<T> roots = new HashSet<>();
 
-    for (Edge<T> edge : edges) {
-      if (!edge.getDestination().equals(edge.getSource())) {
-        roots.remove(edge.getDestination());
+    for (T vertex : vertices) {
+      if (getInDegree(vertex) == 0) {
+        roots.add(vertex);
       }
     }
 
+    if (isEquivalence()) {
+      // TODO: compute vertex with least value in equivalence classes
+    }
+
     return roots;
+  }
+
+  /**
+   * Helper function which returns the number of edges pointing to a specific vertex.
+   *
+   * @param vertex Vertex to search for in graph.
+   * @return In-degree of vertex.
+   */
+  private int getInDegree(T vertex) {
+    int inDegree = 0;
+
+    for (Edge<T> edge : edges) {
+      if (edge.getDestination().equals(vertex)) {
+        inDegree++;
+      }
+    }
+
+    return inDegree;
   }
 
   /**
@@ -163,8 +187,15 @@ public class Graph<T extends Comparable<T>> {
   }
 
   public Set<T> getEquivalenceClass(T vertex) {
-    // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    if (!isEquivalence()) {
+      return new HashSet<>();
+    }
+
+    Set<T> equivalenceClass = new HashSet<>();
+
+    // TODO: add vertices in equivalence class to set
+
+    return equivalenceClass;
   }
 
   public List<T> iterativeBreadthFirstSearch() {
