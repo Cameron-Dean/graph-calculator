@@ -3,6 +3,7 @@ package nz.ac.auckland.se281.datastructures;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A graph that is composed of a set of vertices and edges.
@@ -32,19 +33,28 @@ public class Graph<T extends Comparable<T>> {
    * class. If in an equivalence class, the vertex with the least value will be returned in the set
    * of vertices.
    *
-   * @return Root vertices of the graph.
+   * @return The set of root vertices in the graph.
    */
   public Set<T> getRoots() {
-    Set<T> roots = new HashSet<>();
+    Set<T> roots = new TreeSet<>();
+
+    if (isEquivalence()) {
+      for (T vertex : vertices) {
+        Set<T> equivalenceClass = getEquivalenceClass(vertex);
+
+        for (T equivalenceVertex : equivalenceClass) {
+          roots.add(equivalenceVertex);
+          break;
+        }
+      }
+
+      return roots;
+    }
 
     for (T vertex : vertices) {
       if (getInDegree(vertex) == 0) {
         roots.add(vertex);
       }
-    }
-
-    if (isEquivalence()) {
-      // TODO: compute vertex with least value in equivalence classes
     }
 
     return roots;
@@ -53,8 +63,8 @@ public class Graph<T extends Comparable<T>> {
   /**
    * Helper function which returns the number of edges pointing to a specific vertex.
    *
-   * @param vertex Vertex to search for in graph.
-   * @return In-degree of vertex.
+   * @param vertex The vertex to search for in graph.
+   * @return The in-degree of vertex.
    */
   private int getInDegree(T vertex) {
     int inDegree = 0;
@@ -186,14 +196,26 @@ public class Graph<T extends Comparable<T>> {
     return isReflexive() && isSymmetric() && isTransitive();
   }
 
+  /**
+   * Returns a set of vertices where each vertex is equivalent to the input vertex. An empty set is
+   * returned if the graph is not an equivalence relation.
+   *
+   * @param vertex The vertex to find all equivalent vertices.
+   * @return The set of vertices in the same equivalence class as the input vertex.
+   */
   public Set<T> getEquivalenceClass(T vertex) {
     if (!isEquivalence()) {
       return new HashSet<>();
     }
 
-    Set<T> equivalenceClass = new HashSet<>();
+    Set<T> equivalenceClass = new TreeSet<>();
 
-    // TODO: add vertices in equivalence class to set
+    // since graph has to be transitive, add any edges originating at vertex
+    for (Edge<T> edge : edges) {
+      if (edge.getSource().equals(vertex)) {
+        equivalenceClass.add(edge.getDestination());
+      }
+    }
 
     return equivalenceClass;
   }

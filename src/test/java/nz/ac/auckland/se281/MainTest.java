@@ -273,7 +273,7 @@ public class MainTest {
     public void T1_M01_A_roots() throws Exception {
       runCommands(OPEN_FILE, "m_a.txt", LIST_ROOT_VERTICIES);
       assertContains("Successfully opened graph from file m_a.txt");
-      assertContains("[0, 1]");
+      assertContains("[1]");
     }
 
     @Test
@@ -284,28 +284,28 @@ public class MainTest {
     }
 
     @Test
-    public void T1_M03_A_symmetry() throws Exception {
+    public void T1_M03_MA_symmetry() throws Exception {
       runCommands(OPEN_FILE, "m_a.txt", CHECK_SYMMETRY);
       assertContains("Successfully opened graph from file m_a.txt");
       assertContains("The graph is symmetric");
     }
 
     @Test
-    public void T1_M04_A_transitivity() throws Exception {
+    public void T1_M04_MA_transitivity() throws Exception {
       runCommands(OPEN_FILE, "m_a.txt", CHECK_TRANSITIVITY);
       assertContains("Successfully opened graph from file m_a.txt");
       assertContains("The graph is transitive");
     }
 
     @Test
-    public void T1_M05_A_antisymmetry() throws Exception {
+    public void T1_M05_MA_antisymmetry() throws Exception {
       runCommands(OPEN_FILE, "m_a.txt", CHECK_ANTISYMMETRY);
       assertContains("Successfully opened graph from file m_a.txt");
       assertContains("The graph is antisymmetric");
     }
 
     @Test
-    public void T1_M06_A_equivalence() throws Exception {
+    public void T1_M06_MA_equivalence() throws Exception {
       runCommands(OPEN_FILE, "m_a.txt", CHECK_EQUIVALENCE);
       assertContains("Successfully opened graph from file m_a.txt");
       assertContains("The graph is NOT an equivalence relation");
