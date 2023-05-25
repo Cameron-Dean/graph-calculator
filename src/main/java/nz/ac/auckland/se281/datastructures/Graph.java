@@ -42,12 +42,15 @@ public class Graph<T extends Comparable<T>> {
       for (T vertex : vertices) {
         Set<T> equivalenceClass = getEquivalenceClass(vertex);
 
+        // add first vertex in equivalence class set to roots set
         for (T equivalenceVertex : equivalenceClass) {
           roots.add(equivalenceVertex);
           break;
         }
       }
 
+      // self loops prevent equivalence relation from having vertices with in-degree 0, so exit
+      // method
       return roots;
     }
 
@@ -176,9 +179,10 @@ public class Graph<T extends Comparable<T>> {
   public boolean isAntiSymmetric() {
     for (Edge<T> edgeA : edges) {
       for (Edge<T> edgeB : edges) {
-        if (edgeA.getSource().equals(edgeB.getDestination())
-            && edgeA.getDestination().equals(edgeB.getSource())
+        if (edgeA.getSource().equals(edgeB.getDestination()) // (a, ?), (?, a) is in graph
+            && edgeA.getDestination().equals(edgeB.getSource()) // (?, b), (b, ?) is in graph
             && !edgeA.getSource().equals(edgeB.getSource())) {
+          // a is not equal to b so not antisymmetric
           return false;
         }
       }
