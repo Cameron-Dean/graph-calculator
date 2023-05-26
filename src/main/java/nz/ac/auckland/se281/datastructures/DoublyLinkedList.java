@@ -1,10 +1,15 @@
 package nz.ac.auckland.se281.datastructures;
 
+/**
+ * A doubly linked list which contains nodes that point to the next node and the previous node in
+ * the list.
+ */
 public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
 
   protected DoubleNode<T> head;
   protected DoubleNode<T> tail;
 
+  /** Creates a new doubly linked list. */
   public DoublyLinkedList() {
     super();
     this.head = null;
@@ -47,6 +52,12 @@ public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * Helper function to return the double node at a specified index in the doubly linked list.
+   *
+   * @param index The position of the wanted node in the doubly linked list.
+   * @return The node at the specified index.
+   */
   private DoubleNode<T> locateNode(int index) {
     throw new UnsupportedOperationException();
   }
