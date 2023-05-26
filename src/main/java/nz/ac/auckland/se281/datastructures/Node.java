@@ -6,6 +6,9 @@ public class Node<T extends Comparable<T>> {
   private T value;
   private Node<T> next;
 
+  /** Empty constructor for children classes. */
+  protected Node() {}
+
   /**
    * Creates a new node.
    *
