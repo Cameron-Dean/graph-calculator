@@ -34,12 +34,33 @@ public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
 
   @Override
   public void append(T value) {
-    throw new UnsupportedOperationException();
+    DoubleNode<T> newNode = new DoubleNode<>(value);
+
+    if (super.size == 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.setPrev(this.tail);
+      this.tail.setNext(newNode);
+      this.tail = newNode;
+    }
+
+    super.size++;
   }
 
   @Override
   public T get(int index) throws IndexOutOfBoundsException {
-    throw new UnsupportedOperationException();
+    if (index < 0 || index >= super.size) {
+      throw new IndexOutOfBoundsException(index);
+    }
+
+    Node<T> result = this.head;
+
+    for (int i = 0; i < index; i++) {
+      result = result.getNext();
+    }
+
+    return result.getValue();
   }
 
   @Override
