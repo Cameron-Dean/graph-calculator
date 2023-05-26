@@ -270,14 +270,14 @@ public class MainTest {
     }
 
     @Test
-    public void T1_M01_A_roots() throws Exception {
+    public void T1_M01_MA_roots() throws Exception {
       runCommands(OPEN_FILE, "m_a.txt", LIST_ROOT_VERTICIES);
       assertContains("Successfully opened graph from file m_a.txt");
       assertContains("[1]");
     }
 
     @Test
-    public void T1_M02_A_reflexivity() throws Exception {
+    public void T1_M02_MA_reflexivity() throws Exception {
       runCommands(OPEN_FILE, "m_a.txt", CHECK_REFLEXIVITY);
       assertContains("Successfully opened graph from file m_a.txt");
       assertContains("The graph is NOT reflexive");
@@ -312,73 +312,129 @@ public class MainTest {
     }
 
     @Test
-    public void T1_M07_MB_reflexivity() throws Exception {
+    public void T1_M07_MB_roots() throws Exception {
+      runCommands(OPEN_FILE, "m_b.txt", LIST_ROOT_VERTICIES);
+      assertContains("Successfully opened graph from file m_b.txt");
+      assertContains("[0]");
+    }
+
+    @Test
+    public void T1_M08_MB_reflexivity() throws Exception {
       runCommands(OPEN_FILE, "m_b.txt", CHECK_REFLEXIVITY);
       assertContains("Successfully opened graph from file m_b.txt");
       assertContains("The graph is NOT reflexive");
     }
 
     @Test
-    public void T1_M08_MB_symmetry() throws Exception {
+    public void T1_M09_MB_symmetry() throws Exception {
       runCommands(OPEN_FILE, "m_b.txt", CHECK_SYMMETRY);
       assertContains("Successfully opened graph from file m_b.txt");
       assertContains("The graph is NOT symmetric");
     }
 
     @Test
-    public void T1_M09_MB_transitivity() throws Exception {
+    public void T1_M10_MB_transitivity() throws Exception {
       runCommands(OPEN_FILE, "m_b.txt", CHECK_TRANSITIVITY);
       assertContains("Successfully opened graph from file m_b.txt");
       assertContains("The graph is transitive");
     }
 
     @Test
-    public void T1_M10_MB_antisymmetry() throws Exception {
+    public void T1_M11_MB_antisymmetry() throws Exception {
       runCommands(OPEN_FILE, "m_b.txt", CHECK_ANTISYMMETRY);
       assertContains("Successfully opened graph from file m_b.txt");
       assertContains("The graph is antisymmetric");
     }
 
     @Test
-    public void T1_M11_MB_equivalence() throws Exception {
+    public void T1_M12_MB_equivalence() throws Exception {
       runCommands(OPEN_FILE, "m_b.txt", CHECK_EQUIVALENCE);
       assertContains("Successfully opened graph from file m_b.txt");
       assertContains("The graph is NOT an equivalence relation");
     }
 
     @Test
-    public void T1_M12_MC_reflexivity() throws Exception {
+    public void T1_M13_MC_roots() throws Exception {
+      runCommands(OPEN_FILE, "m_c.txt", LIST_ROOT_VERTICIES);
+      assertContains("Successfully opened graph from file m_c.txt");
+      assertContains("[0]");
+    }
+
+    @Test
+    public void T1_M14_MC_reflexivity() throws Exception {
       runCommands(OPEN_FILE, "m_c.txt", CHECK_REFLEXIVITY);
       assertContains("Successfully opened graph from file m_c.txt");
       assertContains("The graph is NOT reflexive");
     }
 
     @Test
-    public void T1_M13_MC_symmetry() throws Exception {
+    public void T1_M15_MC_symmetry() throws Exception {
       runCommands(OPEN_FILE, "m_c.txt", CHECK_SYMMETRY);
       assertContains("Successfully opened graph from file m_c.txt");
       assertContains("The graph is symmetric");
     }
 
     @Test
-    public void T1_M14_MC_transitivity() throws Exception {
+    public void T1_M16_MC_transitivity() throws Exception {
       runCommands(OPEN_FILE, "m_c.txt", CHECK_TRANSITIVITY);
       assertContains("Successfully opened graph from file m_c.txt");
       assertContains("The graph is transitive");
     }
 
     @Test
-    public void T1_M15_MC_antisymmetry() throws Exception {
+    public void T1_M17_MC_antisymmetry() throws Exception {
       runCommands(OPEN_FILE, "m_c.txt", CHECK_ANTISYMMETRY);
       assertContains("Successfully opened graph from file m_c.txt");
       assertContains("The graph is antisymmetric");
     }
 
     @Test
-    public void T1_M16_MC_equivalence() throws Exception {
+    public void T1_M18_MC_equivalence() throws Exception {
       runCommands(OPEN_FILE, "m_c.txt", CHECK_EQUIVALENCE);
       assertContains("Successfully opened graph from file m_c.txt");
       assertContains("The graph is NOT an equivalence relation");
+    }
+
+    @Test
+    public void T1_M19_MD_roots() throws Exception {
+      runCommands(OPEN_FILE, "m_d.txt", LIST_ROOT_VERTICIES);
+      assertContains("Successfully opened graph from file m_d.txt");
+      assertContains("[0, 3, 4, 6]");
+    }
+
+    @Test
+    public void T1_M20_MD_reflexivity() throws Exception {
+      runCommands(OPEN_FILE, "m_d.txt", CHECK_REFLEXIVITY);
+      assertContains("Successfully opened graph from file m_d.txt");
+      assertContains("The graph is reflexive");
+    }
+
+    @Test
+    public void T1_M21_MD_symmetry() throws Exception {
+      runCommands(OPEN_FILE, "m_d.txt", CHECK_SYMMETRY);
+      assertContains("Successfully opened graph from file m_d.txt");
+      assertContains("The graph is symmetric");
+    }
+
+    @Test
+    public void T1_M22_MD_transitivity() throws Exception {
+      runCommands(OPEN_FILE, "m_d.txt", CHECK_TRANSITIVITY);
+      assertContains("Successfully opened graph from file m_d.txt");
+      assertContains("The graph is transitive");
+    }
+
+    @Test
+    public void T1_M23_MD_antisymmetry() throws Exception {
+      runCommands(OPEN_FILE, "m_d.txt", CHECK_ANTISYMMETRY);
+      assertContains("Successfully opened graph from file m_d.txt");
+      assertContains("The graph is NOT antisymmetric");
+    }
+
+    @Test
+    public void T1_M24_MD_equivalence() throws Exception {
+      runCommands(OPEN_FILE, "m_d.txt", CHECK_EQUIVALENCE);
+      assertContains("Successfully opened graph from file m_d.txt");
+      assertContains("The graph is an equivalence relation");
     }
   }
 }
