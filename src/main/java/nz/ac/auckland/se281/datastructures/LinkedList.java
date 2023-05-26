@@ -79,10 +79,29 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
 
     newNode.setNext(prev.getNext());
     prev.setNext(newNode);
+    this.size++;
   }
 
-  public void remove(int index) {
-    throw new UnsupportedOperationException();
+  /**
+   * Removes the element at the specified index in the linked list.
+   *
+   * @param index The position in the linked list to remove the element.
+   * @throws IndexOutOfBoundsException
+   */
+  public void remove(int index) throws IndexOutOfBoundsException {
+    if (index < 0 || index >= this.size) {
+      throw new IndexOutOfBoundsException(index);
+    }
+
+    if (index == 0) {
+      this.head = this.head.getNext();
+      return;
+    }
+
+    Node<T> prev = locateNode(index - 1);
+
+    prev.setNext(prev.getNext().getNext());
+    this.size--;
   }
 
   /**
