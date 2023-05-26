@@ -36,16 +36,69 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
     this.size++;
   }
 
-  public T get(int index) {
-    throw new UnsupportedOperationException();
+  /**
+   * Returns the value at a specified index in the linked list.
+   *
+   * @param index The position of the element in the linked list.
+   * @return The value at the specified index.
+   * @throws IndexOutOfBoundsException
+   */
+  public T get(int index) throws IndexOutOfBoundsException {
+    if (index < 0 || index >= this.size) {
+      throw new IndexOutOfBoundsException(index);
+    }
+
+    Node<T> result = this.head;
+
+    for (int i = 0; i < index; i++) {
+      result = result.getNext();
+    }
+
+    return result.getValue();
   }
 
-  public void insert(int index, T value) {
-    throw new UnsupportedOperationException();
+  /**
+   * Inserts an element into the linked list at the specified index with the specified value.
+   *
+   * @param index The position at which the element will be in the linked list.
+   * @param value The value that will be stored.
+   * @throws IndexOutOfBoundsException
+   */
+  public void insert(int index, T value) throws IndexOutOfBoundsException {
+    if (index < 0 || index > this.size) {
+      throw new IndexOutOfBoundsException(index);
+    }
+
+    if (index == this.size) {
+      append(value);
+      return;
+    }
+
+    Node<T> prev = locateNode(index - 1);
+    Node<T> newNode = new Node<>(value);
+
+    newNode.setNext(prev.getNext());
+    prev.setNext(newNode);
   }
 
   public void remove(int index) {
     throw new UnsupportedOperationException();
+  }
+
+  /**
+   * Helper function to return the node at a specified index in the linked list.
+   *
+   * @param index The position of the wanted node in the linked list.
+   * @return The node at the specified index.
+   */
+  protected Node<T> locateNode(int index) {
+    Node<T> result = this.head;
+
+    for (int i = 0; i < index; i++) {
+      result = result.getNext();
+    }
+
+    return result;
   }
 
   /**
