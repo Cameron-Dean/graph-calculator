@@ -24,6 +24,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
     if (this.size == 0) {
       this.head = newNode;
     } else {
+      // add node and update head
       newNode.setNext(this.head);
       this.head = newNode;
     }
@@ -42,13 +43,9 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
     if (this.size == 0) {
       this.head = newNode;
     } else {
-      Node<T> temp = this.head;
-
-      while (temp.getNext() != null) {
-        temp = temp.getNext();
-      }
-
-      temp.setNext(newNode);
+      // find current last node and add pointer to new node
+      Node<T> prev = locateNode(size - 1);
+      prev.setNext(newNode);
     }
 
     this.size++;
@@ -59,7 +56,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
    *
    * @param index The position of the element in the linked list.
    * @return The value at the specified index.
-   * @throws IndexOutOfBoundsException
+   * @throws IndexOutOfBoundsException The specified index does not exist within the linked list.
    */
   public T get(int index) throws IndexOutOfBoundsException {
     if (index < 0 || index >= this.size) {
@@ -80,11 +77,16 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
    *
    * @param index The position at which the element will be in the linked list.
    * @param value The value that will be stored.
-   * @throws IndexOutOfBoundsException
+   * @throws IndexOutOfBoundsException The specified index does not exist within the linked list.
    */
   public void insert(int index, T value) throws IndexOutOfBoundsException {
     if (index < 0 || index > this.size) {
       throw new IndexOutOfBoundsException(index);
+    }
+
+    if (index == 0) {
+      prepend(value);
+      return;
     }
 
     if (index == this.size) {
@@ -95,6 +97,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
     Node<T> prev = locateNode(index - 1);
     Node<T> newNode = new Node<>(value);
 
+    // shuffle node pointers
     newNode.setNext(prev.getNext());
     prev.setNext(newNode);
     this.size++;
@@ -104,7 +107,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
    * Removes the element at the specified index in the linked list.
    *
    * @param index The position in the linked list to remove the element.
-   * @throws IndexOutOfBoundsException
+   * @throws IndexOutOfBoundsException The specified index does not exist within the linked list.
    */
   public void remove(int index) throws IndexOutOfBoundsException {
     if (index < 0 || index >= this.size) {
@@ -118,6 +121,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
 
     Node<T> prev = locateNode(index - 1);
 
+    // set pointer to next node's next node to remove the pointer to the node at the index
     prev.setNext(prev.getNext().getNext());
     this.size--;
   }

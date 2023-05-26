@@ -5,11 +5,6 @@ package nz.ac.auckland.se281.datastructures;
  */
 public class Stack<T extends Comparable<T>> extends LinkedList<T> {
 
-  /** Creates a new stack. */
-  public Stack() {
-    super();
-  }
-
   /**
    * Adds an element with the specified value to the top of the stack.
    *
