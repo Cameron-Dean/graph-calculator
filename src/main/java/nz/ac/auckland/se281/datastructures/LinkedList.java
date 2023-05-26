@@ -14,6 +14,24 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
   }
 
   /**
+   * Adds a new node with a specified value to the beginning of the list.
+   *
+   * @param value The value to be stored at the beginning of the list.
+   */
+  public void prepend(T value) {
+    Node<T> newNode = new Node<>(value);
+
+    if (this.size == 0) {
+      this.head = newNode;
+    } else {
+      newNode.setNext(this.head);
+      this.head = newNode;
+    }
+
+    this.size++;
+  }
+
+  /**
    * Adds a new node with a specified value to the end of the list.
    *
    * @param value The value to be stored at the end of the list.

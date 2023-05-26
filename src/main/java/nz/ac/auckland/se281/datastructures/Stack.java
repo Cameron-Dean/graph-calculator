@@ -11,14 +11,16 @@ public class Stack<T extends Comparable<T>> extends LinkedList<T> {
   }
 
   public void push(T value) {
-    throw new UnsupportedOperationException();
+    super.prepend(value);
   }
 
   public T pop() {
-    throw new UnsupportedOperationException();
+    Node<T> result = super.head;
+    super.remove(0);
+    return result.getValue();
   }
 
   public T peek() {
-    throw new UnsupportedOperationException();
+    return super.head.getValue();
   }
 }
