@@ -5,9 +5,6 @@ public class DoubleNode<T extends Comparable<T>> extends Node<T> {
 
   private Node<T> prev;
 
-  /** Empty constructor for children classes. */
-  protected DoubleNode() {}
-
   /**
    * Creates a new node with pointers to the next and previous nodes.
    *

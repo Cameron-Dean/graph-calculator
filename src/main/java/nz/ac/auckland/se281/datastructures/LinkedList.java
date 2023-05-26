@@ -1,16 +1,14 @@
 package nz.ac.auckland.se281.datastructures;
 
 /** A singly linked list containing nodes which point forwards to the next node. */
-public class LinkedList<T extends Comparable<T>> extends Node<T> {
+public class LinkedList<T extends Comparable<T>> extends List<T> {
 
-  protected Node<T> head;
-  protected int size;
+  private Node<T> head;
 
   /** Creates a new singly linked list. */
   public LinkedList() {
     super();
     this.head = null;
-    this.size = 0;
   }
 
   /**
@@ -21,7 +19,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
   public void prepend(T value) {
     Node<T> newNode = new Node<>(value);
 
-    if (this.size == 0) {
+    if (super.size == 0) {
       this.head = newNode;
     } else {
       // add node and update head
@@ -29,7 +27,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
       this.head = newNode;
     }
 
-    this.size++;
+    super.size++;
   }
 
   /**
@@ -40,15 +38,15 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
   public void append(T value) {
     Node<T> newNode = new Node<>(value);
 
-    if (this.size == 0) {
+    if (super.size == 0) {
       this.head = newNode;
     } else {
       // find current last node and add pointer to new node
-      Node<T> prev = locateNode(size - 1);
+      Node<T> prev = locateNode(super.size - 1);
       prev.setNext(newNode);
     }
 
-    this.size++;
+    super.size++;
   }
 
   /**
@@ -59,7 +57,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
    * @throws IndexOutOfBoundsException The specified index does not exist within the linked list.
    */
   public T get(int index) throws IndexOutOfBoundsException {
-    if (index < 0 || index >= this.size) {
+    if (index < 0 || index >= super.size) {
       throw new IndexOutOfBoundsException(index);
     }
 
@@ -80,7 +78,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
    * @throws IndexOutOfBoundsException The specified index does not exist within the linked list.
    */
   public void insert(int index, T value) throws IndexOutOfBoundsException {
-    if (index < 0 || index > this.size) {
+    if (index < 0 || index > super.size) {
       throw new IndexOutOfBoundsException(index);
     }
 
@@ -89,7 +87,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
       return;
     }
 
-    if (index == this.size) {
+    if (index == super.size) {
       append(value);
       return;
     }
@@ -100,7 +98,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
     // shuffle node pointers
     newNode.setNext(prev.getNext());
     prev.setNext(newNode);
-    this.size++;
+    super.size++;
   }
 
   /**
@@ -110,7 +108,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
    * @throws IndexOutOfBoundsException The specified index does not exist within the linked list.
    */
   public void remove(int index) throws IndexOutOfBoundsException {
-    if (index < 0 || index >= this.size) {
+    if (index < 0 || index >= super.size) {
       throw new IndexOutOfBoundsException(index);
     }
 
@@ -123,7 +121,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
 
     // set pointer to next node's next node to remove the pointer to the node at the index
     prev.setNext(prev.getNext().getNext());
-    this.size--;
+    super.size--;
   }
 
   /**
@@ -132,7 +130,7 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
    * @param index The position of the wanted node in the linked list.
    * @return The node at the specified index.
    */
-  protected Node<T> locateNode(int index) {
+  private Node<T> locateNode(int index) {
     Node<T> result = this.head;
 
     for (int i = 0; i < index; i++) {
@@ -140,23 +138,5 @@ public class LinkedList<T extends Comparable<T>> extends Node<T> {
     }
 
     return result;
-  }
-
-  /**
-   * Returns the number of elements in the linked list.
-   *
-   * @return The size of the linked list.
-   */
-  public int size() {
-    return this.size;
-  }
-
-  /**
-   * Returns true if the linked list does not contain any elements.
-   *
-   * @return True if the linked list is empty.
-   */
-  public boolean isEmpty() {
-    return this.size == 0;
   }
 }
