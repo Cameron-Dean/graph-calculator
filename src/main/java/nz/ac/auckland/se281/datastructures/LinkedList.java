@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281.datastructures;
 
 /** A singly linked list containing nodes which point forwards to the next node. */
-public class LinkedList<T extends Comparable<T>> extends List<T> {
+public class LinkedList<T extends Comparable<T>> extends MyList<T> {
 
   protected Node<T> head;
 

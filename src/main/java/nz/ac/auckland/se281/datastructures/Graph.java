@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281.datastructures;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -224,9 +225,34 @@ public class Graph<T extends Comparable<T>> {
     return equivalenceClass;
   }
 
+  /**
+   * Returns a list of the vertices traversed using breadth-first search, where the least vertex is
+   * visited first.
+   *
+   * @return The list of vertices traversed using breadth-first search.
+   */
   public List<T> iterativeBreadthFirstSearch() {
-    // TODO: Task 2.
-    throw new UnsupportedOperationException();
+    Set<T> roots = getRoots();
+    List<T> visited = new ArrayList<>();
+    Queue<T> queue = new Queue<>();
+
+    for (T root : roots) {
+      visited.add(root);
+      queue.enqueue(root);
+
+      while (!queue.isEmpty()) {
+        T vertex = queue.dequeue();
+
+        for (Edge<T> edge : edges) {
+          if (edge.getSource().equals(vertex) && !visited.contains(edge.getDestination())) {
+            visited.add(edge.getDestination());
+            queue.enqueue(edge.getDestination());
+          }
+        }
+      }
+    }
+
+    return visited;
   }
 
   public List<T> iterativeDepthFirstSearch() {

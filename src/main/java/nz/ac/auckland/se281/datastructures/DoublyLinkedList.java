@@ -4,7 +4,7 @@ package nz.ac.auckland.se281.datastructures;
  * A doubly linked list which contains nodes that point to the next node and the previous node in
  * the list.
  */
-public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
+public class DoublyLinkedList<T extends Comparable<T>> extends MyList<T> {
 
   protected DoubleNode<T> head;
   protected DoubleNode<T> tail;
