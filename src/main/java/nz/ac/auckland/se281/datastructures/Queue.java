@@ -5,15 +5,32 @@ package nz.ac.auckland.se281.datastructures;
  */
 public class Queue<T extends Comparable<T>> extends DoublyLinkedList<T> {
 
+  /**
+   * Adds an element to the end of the queue which stores the value specified.
+   *
+   * @param value The value to be stored at the end of the queue.
+   */
   public void enqueue(T value) {
-    throw new UnsupportedOperationException();
+    super.append(value);
   }
 
+  /**
+   * Returns the value at the front of the queue and removes that element from the queue.
+   *
+   * @return The value at the front of the queue.
+   */
   public T dequeue() {
-    throw new UnsupportedOperationException();
+    DoubleNode<T> result = super.head;
+    super.remove(0);
+    return result.getValue();
   }
 
+  /**
+   * Returns the value at the front of the queue.
+   *
+   * @return The value at the front of the queue.
+   */
   public T peek() {
-    throw new UnsupportedOperationException();
+    return super.head.getValue();
   }
 }
