@@ -79,17 +79,44 @@ public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
       return;
     }
 
-    DoubleNode<T> prev = locateNode(index);
+    DoubleNode<T> prev = locateNode(index - 1);
     DoubleNode<T> newNode = new DoubleNode<>(value);
+
+    // shuffle node pointers
     newNode.setPrev(prev);
     newNode.setNext(prev.getNext());
     prev.getNext().setPrev(newNode);
     prev.setNext(newNode);
+    super.size++;
   }
 
   @Override
   public void remove(int index) throws IndexOutOfBoundsException {
-    throw new UnsupportedOperationException();
+    if (index < 0 || index >= super.size) {
+      throw new IndexOutOfBoundsException(index);
+    }
+
+    if (index == 0) {
+      // remove first element
+      if (this.head == this.tail) {
+        this.head = null;
+        this.tail = null;
+      } else {
+        this.head = this.head.getNext();
+        this.head.setPrev(null);
+      }
+    } else if (index == (super.size - 1)) {
+      // remove last element
+      this.tail.getPrev().setNext(null);
+      this.tail = this.tail.getPrev();
+    } else {
+      // remove middle element
+      DoubleNode<T> nodeToRemove = locateNode(index);
+      nodeToRemove.getPrev().setNext(nodeToRemove.getNext());
+      nodeToRemove.getNext().setPrev(nodeToRemove.getPrev());
+    }
+
+    super.size--;
   }
 
   /**

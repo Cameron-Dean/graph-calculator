@@ -89,13 +89,13 @@ public class LinkedList<T extends Comparable<T>> extends List<T> {
 
     if (index == 0) {
       this.head = this.head.getNext();
-      return;
+    } else {
+      Node<T> prev = locateNode(index - 1);
+
+      // set pointer to next node's next node to remove the pointer to the node at the index
+      prev.setNext(prev.getNext().getNext());
     }
 
-    Node<T> prev = locateNode(index - 1);
-
-    // set pointer to next node's next node to remove the pointer to the node at the index
-    prev.setNext(prev.getNext().getNext());
     super.size--;
   }
 
