@@ -37,15 +37,6 @@ public class DoubleNode<T extends Comparable<T>> {
   }
 
   /**
-   * Returns the node that the current double node points backwards to.
-   *
-   * @return The previous double node.
-   */
-  protected DoubleNode<T> getPrev() {
-    return this.prev;
-  }
-
-  /**
    * Returns the node that the current double node points forward to.
    *
    * @return The next double node.
@@ -61,6 +52,15 @@ public class DoubleNode<T extends Comparable<T>> {
    */
   protected void setNext(DoubleNode<T> next) {
     this.next = next;
+  }
+
+  /**
+   * Returns the node that the current double node points backwards to.
+   *
+   * @return The previous double node.
+   */
+  protected DoubleNode<T> getPrev() {
+    return this.prev;
   }
 
   /**
