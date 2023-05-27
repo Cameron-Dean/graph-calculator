@@ -439,6 +439,48 @@ public class MainTest {
       assertContains("The graph is an equivalence relation");
     }
 
+    @Test
+    public void T1_M25_ME_roots() throws Exception {
+      runCommands(OPEN_FILE, "m_e.txt", LIST_ROOT_VERTICIES);
+      assertContains("Successfully opened graph from file m_e.txt");
+      assertContains("[1]");
+    }
+
+    @Test
+    public void T1_M26_ME_reflexivity() throws Exception {
+      runCommands(OPEN_FILE, "m_e.txt", CHECK_REFLEXIVITY);
+      assertContains("Successfully opened graph from file m_e.txt");
+      assertContains("The graph is NOT reflexive");
+    }
+
+    @Test
+    public void T1_M27_ME_symmetry() throws Exception {
+      runCommands(OPEN_FILE, "m_e.txt", CHECK_SYMMETRY);
+      assertContains("Successfully opened graph from file m_e.txt");
+      assertContains("The graph is NOT symmetric");
+    }
+
+    @Test
+    public void T1_M28_ME_transitivity() throws Exception {
+      runCommands(OPEN_FILE, "m_e.txt", CHECK_TRANSITIVITY);
+      assertContains("Successfully opened graph from file m_e.txt");
+      assertContains("The graph is NOT transitive");
+    }
+
+    @Test
+    public void T1_M29_ME_antisymmetry() throws Exception {
+      runCommands(OPEN_FILE, "m_e.txt", CHECK_ANTISYMMETRY);
+      assertContains("Successfully opened graph from file m_e.txt");
+      assertContains("The graph is antisymmetric");
+    }
+
+    @Test
+    public void T1_M30_ME_equivalence() throws Exception {
+      runCommands(OPEN_FILE, "m_e.txt", CHECK_EQUIVALENCE);
+      assertContains("Successfully opened graph from file m_e.txt");
+      assertContains("The graph is NOT an equivalence relation");
+    }
+
     /* Task 2 */
 
     @Test
@@ -495,6 +537,20 @@ public class MainTest {
       runCommands(OPEN_FILE, "m_d.txt", GRAPH_SEARCH_IDFS);
       assertContains("Successfully opened graph from file m_d.txt");
       assertContains("[0, 1, 2, 3, 5, 4, 6, 7, 8, 9]");
+    }
+
+    @Test
+    public void T2_M09_ME_iterative_BFS() throws Exception {
+      runCommands(OPEN_FILE, "m_e.txt", GRAPH_SEARCH_IBFS);
+      assertContains("Successfully opened graph from file m_e.txt");
+      assertContains("[1, 2, 3, 4, 8, 9, 5, 6, 7]");
+    }
+
+    @Test
+    public void T2_M10_ME_iterative_DFS() throws Exception {
+      runCommands(OPEN_FILE, "m_e.txt", GRAPH_SEARCH_IDFS);
+      assertContains("Successfully opened graph from file m_e.txt");
+      assertContains("[1, 2, 8, 9, 3, 5, 6, 4, 7]");
     }
   }
 }
