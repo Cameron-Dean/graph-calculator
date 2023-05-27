@@ -1,9 +1,11 @@
 package nz.ac.auckland.se281.datastructures;
 
+/** List class for linked list and doubly linked list to extend. */
 public abstract class List<T extends Comparable<T>> {
 
   protected int size;
 
+  /** Creates a new list. */
   protected List() {
     this.size = 0;
   }

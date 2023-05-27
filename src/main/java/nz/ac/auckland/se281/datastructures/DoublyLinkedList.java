@@ -24,6 +24,7 @@ public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
       this.head = newNode;
       this.tail = newNode;
     } else {
+      // add node and update head pointer
       newNode.setNext(this.head);
       this.head.setPrev(newNode);
       this.head = newNode;
@@ -40,6 +41,7 @@ public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
       this.head = newNode;
       this.tail = newNode;
     } else {
+      // add node and update tail pointer
       newNode.setPrev(this.tail);
       this.tail.setNext(newNode);
       this.tail = newNode;
@@ -56,6 +58,7 @@ public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
 
     DoubleNode<T> result = this.head;
 
+    // get to the node at the index specified
     for (int i = 0; i < index; i++) {
       result = result.getNext();
     }

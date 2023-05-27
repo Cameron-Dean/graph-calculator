@@ -49,6 +49,7 @@ public class LinkedList<T extends Comparable<T>> extends List<T> {
 
     Node<T> result = this.head;
 
+    // get to the node at the index specified
     for (int i = 0; i < index; i++) {
       result = result.getNext();
     }
