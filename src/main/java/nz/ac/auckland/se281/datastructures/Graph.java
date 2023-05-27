@@ -26,7 +26,7 @@ public class Graph<T extends Comparable<T>> {
    */
   public Graph(Set<T> vertices, Set<Edge<T>> edges) {
     this.vertices = vertices;
-    this.edges = edges;
+    this.edges = new TreeSet<>(edges);
   }
 
   /**
@@ -236,6 +236,7 @@ public class Graph<T extends Comparable<T>> {
     List<T> visited = new ArrayList<>();
     Queue<T> queue = new Queue<>();
 
+    // traverse from each root
     for (T root : roots) {
       visited.add(root);
       queue.enqueue(root);

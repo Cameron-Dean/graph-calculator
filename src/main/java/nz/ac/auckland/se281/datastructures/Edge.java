@@ -1,13 +1,13 @@
 package nz.ac.auckland.se281.datastructures;
 
 /**
- * An edge in a graph that connects two verticies.
+ * An edge in a graph that connects two vertices.
  *
  * <p>You must NOT change the signature of the constructor of this class.
  *
  * @param <T> The type of each vertex.
  */
-public class Edge<T> {
+public class Edge<T extends Comparable<T>> implements Comparable<T> {
 
   private T source;
   private T destination;
@@ -39,5 +39,14 @@ public class Edge<T> {
    */
   public T getDestination() {
     return this.destination;
+  }
+
+  @Override
+  public int compareTo(T o) {
+    // use destination as main comparator, and then source as secondary comparator
+    if (o.compareTo(this.destination) == 0) {
+      return o.compareTo(this.source);
+    }
+    return o.compareTo(this.destination);
   }
 }
