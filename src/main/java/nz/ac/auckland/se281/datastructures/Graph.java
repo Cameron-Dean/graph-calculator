@@ -256,6 +256,12 @@ public class Graph<T extends Comparable<T>> {
     return visited;
   }
 
+  /**
+   * Returns a list of the vertices traversed using depth-first search, where the least vertex is
+   * visited first.
+   *
+   * @return The list of vertices traversed using depth-first search.
+   */
   public List<T> iterativeDepthFirstSearch() {
     // TODO: Task 2.
     throw new UnsupportedOperationException();
