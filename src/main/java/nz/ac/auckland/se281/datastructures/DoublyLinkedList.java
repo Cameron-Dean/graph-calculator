@@ -54,7 +54,7 @@ public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
       throw new IndexOutOfBoundsException(index);
     }
 
-    Node<T> result = this.head;
+    DoubleNode<T> result = this.head;
 
     for (int i = 0; i < index; i++) {
       result = result.getNext();
@@ -65,7 +65,26 @@ public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
 
   @Override
   public void insert(int index, T value) throws IndexOutOfBoundsException {
-    throw new UnsupportedOperationException();
+    if (index < 0 || index > super.size) {
+      throw new IndexOutOfBoundsException(index);
+    }
+
+    if (index == 0) {
+      prepend(value);
+      return;
+    }
+
+    if (index == super.size) {
+      append(value);
+      return;
+    }
+
+    DoubleNode<T> prev = locateNode(index);
+    DoubleNode<T> newNode = new DoubleNode<>(value);
+    newNode.setPrev(prev);
+    newNode.setNext(prev.getNext());
+    prev.getNext().setPrev(newNode);
+    prev.setNext(newNode);
   }
 
   @Override
@@ -80,6 +99,12 @@ public class DoublyLinkedList<T extends Comparable<T>> extends List<T> {
    * @return The node at the specified index.
    */
   private DoubleNode<T> locateNode(int index) {
-    throw new UnsupportedOperationException();
+    DoubleNode<T> result = this.head;
+
+    for (int i = 0; i < index; i++) {
+      result = result.getNext();
+    }
+
+    return result;
   }
 }

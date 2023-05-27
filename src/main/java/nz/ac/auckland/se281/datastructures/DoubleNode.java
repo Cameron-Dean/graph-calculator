@@ -1,9 +1,11 @@
 package nz.ac.auckland.se281.datastructures;
 
 /** A node to be generated in doubly linked lists. */
-public class DoubleNode<T extends Comparable<T>> extends Node<T> {
+public class DoubleNode<T extends Comparable<T>> {
 
-  private Node<T> prev;
+  private T value;
+  private DoubleNode<T> next;
+  private DoubleNode<T> prev;
 
   /**
    * Creates a new node with pointers to the next and previous nodes.
@@ -11,25 +13,62 @@ public class DoubleNode<T extends Comparable<T>> extends Node<T> {
    * @param value The value to be stored by the new double node initially.
    */
   protected DoubleNode(T value) {
-    super(value);
+    this.value = value;
+    this.next = null;
     this.prev = null;
   }
 
   /**
-   * Returns the node that the current node points backwards to.
+   * Returns the value associated with the current double node.
    *
-   * @return The previous node.
+   * @return The double node's value.
    */
-  protected Node<T> getPrev() {
+  protected T getValue() {
+    return this.value;
+  }
+
+  /**
+   * Sets the value within the current double node.
+   *
+   * @param value The value to be set for the double node.
+   */
+  protected void setValue(T value) {
+    this.value = value;
+  }
+
+  /**
+   * Returns the node that the current double node points backwards to.
+   *
+   * @return The previous double node.
+   */
+  protected DoubleNode<T> getPrev() {
     return this.prev;
   }
 
   /**
-   * Sets the current node to point backwards to this previous node.
+   * Returns the node that the current double node points forward to.
    *
-   * @param prev The node to be set as previous to the current node.
+   * @return The next double node.
    */
-  protected void setPrev(Node<T> prev) {
+  protected DoubleNode<T> getNext() {
+    return this.next;
+  }
+
+  /**
+   * Sets the current double node to point towards this next double node.
+   *
+   * @param next The double node to be pointed to by the current double node.
+   */
+  protected void setNext(DoubleNode<T> next) {
+    this.next = next;
+  }
+
+  /**
+   * Sets the current node to point backwards to this previous double node.
+   *
+   * @param prev The double node to be set as previous to the current double node.
+   */
+  protected void setPrev(DoubleNode<T> prev) {
     this.prev = prev;
   }
 }
