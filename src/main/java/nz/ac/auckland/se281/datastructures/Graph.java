@@ -263,8 +263,32 @@ public class Graph<T extends Comparable<T>> {
    * @return The list of vertices traversed using depth-first search.
    */
   public List<T> iterativeDepthFirstSearch() {
-    // TODO: Task 2.
-    throw new UnsupportedOperationException();
+    Set<T> roots = getRoots();
+    Set<Edge<T>> reverseEdges = new TreeSet<>(edges).descendingSet();
+    List<T> visited = new ArrayList<>();
+    Stack<T> stack = new Stack<>();
+
+    // traverse from each root
+    for (T root : roots) {
+      visited.add(root);
+      stack.push(root);
+
+      while (!stack.isEmpty()) {
+        T vertex = stack.pop();
+
+        if (!visited.contains(vertex)) {
+          visited.add(vertex);
+        }
+
+        for (Edge<T> edge : reverseEdges) {
+          if (edge.getSource().equals(vertex) && !visited.contains(edge.getDestination())) {
+            stack.push(edge.getDestination());
+          }
+        }
+      }
+    }
+
+    return visited;
   }
 
   public List<T> recursiveBreadthFirstSearch() {
