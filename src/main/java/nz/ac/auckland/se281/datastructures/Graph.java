@@ -291,9 +291,50 @@ public class Graph<T extends Comparable<T>> {
     return visited;
   }
 
+  /**
+   * Returns a list of the vertices traversed using recursive breadth-first search, where the least
+   * vertex is visited first.
+   *
+   * @return The list of vertices traversed using breadth-first search recursively.
+   */
   public List<T> recursiveBreadthFirstSearch() {
-    // TODO: Task 3.
-    throw new UnsupportedOperationException();
+    Set<T> roots = getRoots();
+    List<T> visited = new ArrayList<>();
+    Queue<T> queue = new Queue<>();
+
+    // traverse from each root
+    for (T root : roots) {
+      visited.add(root);
+      queue.enqueue(root);
+      recursiveBreadthFirstSearchHelper(visited, queue);
+    }
+
+    return visited;
+  }
+
+  /**
+   * Helper function for recursive breadth-first search.
+   *
+   * @param visited The list of vertices visited so far.
+   * @param queue The queue of vertices to visit.
+   */
+  private void recursiveBreadthFirstSearchHelper(List<T> visited, Queue<T> queue) {
+    // base case
+    if (queue.isEmpty()) {
+      return;
+    }
+
+    T vertex = queue.dequeue();
+
+    // add all vertices next to vertex to the queue
+    for (Edge<T> edge : edges) {
+      if (edge.getSource().equals(vertex) && !visited.contains(edge.getDestination())) {
+        visited.add(edge.getDestination());
+        queue.enqueue(edge.getDestination());
+      }
+    }
+
+    recursiveBreadthFirstSearchHelper(visited, queue);
   }
 
   public List<T> recursiveDepthFirstSearch() {
