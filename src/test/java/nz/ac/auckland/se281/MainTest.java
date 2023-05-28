@@ -481,6 +481,48 @@ public class MainTest {
       assertContains("The graph is NOT an equivalence relation");
     }
 
+    @Test
+    public void T1_M31_MF_roots() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", LIST_ROOT_VERTICIES);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("[]");
+    }
+
+    @Test
+    public void T1_M32_MF_reflexivity() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", CHECK_REFLEXIVITY);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("The graph is NOT reflexive");
+    }
+
+    @Test
+    public void T1_M33_MF_symmetry() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", CHECK_SYMMETRY);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("The graph is symmetric");
+    }
+
+    @Test
+    public void T1_M34_MF_transitivity() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", CHECK_TRANSITIVITY);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("The graph is NOT transitive");
+    }
+
+    @Test
+    public void T1_M35_MF_antisymmetry() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", CHECK_ANTISYMMETRY);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("The graph is NOT antisymmetric");
+    }
+
+    @Test
+    public void T1_M36_MF_equivalence() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", CHECK_EQUIVALENCE);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("The graph is NOT an equivalence relation");
+    }
+
     /* Task 2 */
 
     @Test
@@ -553,6 +595,20 @@ public class MainTest {
       assertContains("[1, 2, 8, 9, 3, 5, 6, 4, 7]");
     }
 
+    @Test
+    public void T2_M11_MF_iterative_BFS() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", GRAPH_SEARCH_IBFS);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("[]");
+    }
+
+    @Test
+    public void T2_M12_MF_iterative_DFS() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", GRAPH_SEARCH_IDFS);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("[]");
+    }
+
     /* Task 3 */
 
     @Test
@@ -623,6 +679,20 @@ public class MainTest {
       runCommands(OPEN_FILE, "m_e.txt", GRAPH_SEARCH_RDFS);
       assertContains("Successfully opened graph from file m_e.txt");
       assertContains("[1, 2, 8, 9, 3, 5, 6, 4, 7]");
+    }
+
+    @Test
+    public void T3_M11_MF_recursive_BFS() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", GRAPH_SEARCH_RBFS);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("[]");
+    }
+
+    @Test
+    public void T3_M12_MF_recursive_DFS() throws Exception {
+      runCommands(OPEN_FILE, "m_f.txt", GRAPH_SEARCH_RDFS);
+      assertContains("Successfully opened graph from file m_f.txt");
+      assertContains("[]");
     }
   }
 }
