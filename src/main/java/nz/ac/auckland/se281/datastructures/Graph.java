@@ -226,10 +226,10 @@ public class Graph<T extends Comparable<T>> {
   }
 
   /**
-   * Returns a list of the vertices traversed using breadth-first search, where the least vertex is
-   * visited first.
+   * Returns a list of the vertices traversed using iterative breadth-first search, where the least
+   * vertex is visited first.
    *
-   * @return The list of vertices traversed using breadth-first search.
+   * @return The list of vertices traversed using breadth-first search iteratively.
    */
   public List<T> iterativeBreadthFirstSearch() {
     Set<T> roots = getRoots();
@@ -257,10 +257,10 @@ public class Graph<T extends Comparable<T>> {
   }
 
   /**
-   * Returns a list of the vertices traversed using depth-first search, where the least vertex is
-   * visited first.
+   * Returns a list of the vertices traversed using iterative depth-first search, where the least
+   * vertex is visited first.
    *
-   * @return The list of vertices traversed using depth-first search.
+   * @return The list of vertices traversed using depth-first search iteratively.
    */
   public List<T> iterativeDepthFirstSearch() {
     Set<T> roots = getRoots();
@@ -337,8 +337,54 @@ public class Graph<T extends Comparable<T>> {
     recursiveBreadthFirstSearchHelper(visited, queue);
   }
 
+  /**
+   * Returns a list of the vertices traversed using recursive depth-first search, where the least
+   * vertex is visited first.
+   *
+   * @return The list of vertices traversed using depth-first search recursively.
+   */
   public List<T> recursiveDepthFirstSearch() {
-    // TODO: Task 3.
-    throw new UnsupportedOperationException();
+    Set<T> roots = getRoots();
+    Set<Edge<T>> reverseEdges = new TreeSet<>(edges).descendingSet();
+    List<T> visited = new ArrayList<>();
+    Stack<T> stack = new Stack<>();
+
+    // traverse from each root
+    for (T root : roots) {
+      stack.push(root);
+      recursiveDepthFirstSearchHelper(reverseEdges, visited, stack);
+    }
+
+    return visited;
+  }
+
+  /**
+   * Helper function for recursive depth-first search.
+   *
+   * @param reverseEdges The set of edges in reverse order.
+   * @param visited The list of vertices visited so far.
+   * @param stack The stack of vertices to visit.
+   */
+  private void recursiveDepthFirstSearchHelper(
+      Set<Edge<T>> reverseEdges, List<T> visited, Stack<T> stack) {
+    // base case
+    if (stack.isEmpty()) {
+      return;
+    }
+
+    T vertex = stack.pop();
+
+    if (!visited.contains(vertex)) {
+      visited.add(vertex);
+    }
+
+    // add all vertices below the vertex to the stack
+    for (Edge<T> edge : reverseEdges) {
+      if (edge.getSource().equals(vertex) && !visited.contains(edge.getDestination())) {
+        stack.push(edge.getDestination());
+      }
+    }
+
+    recursiveDepthFirstSearchHelper(reverseEdges, visited, stack);
   }
 }
