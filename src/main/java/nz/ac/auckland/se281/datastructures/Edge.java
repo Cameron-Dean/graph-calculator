@@ -43,10 +43,19 @@ public class Edge<T extends Comparable<T>> implements Comparable<T> {
 
   @Override
   public int compareTo(T o) {
-    // use destination as main comparator, and then source as secondary comparator
-    if (o.compareTo(this.destination) == 0) {
-      return o.compareTo(this.source);
+    if (o instanceof Edge) {
+      @SuppressWarnings("unchecked")
+      Edge<T> edge = (Edge<T>) o;
+
+      if (Integer.parseInt(edge.getDestination().toString())
+          == Integer.parseInt((String) this.destination)) {
+        return Integer.parseInt((String) this.source)
+            - Integer.parseInt(edge.getSource().toString());
+      }
+      return Integer.parseInt((String) this.destination)
+          - Integer.parseInt(edge.getDestination().toString());
     }
-    return o.compareTo(this.destination);
+
+    throw new UnsupportedOperationException("Vertices in graph must be integers, obviously.");
   }
 }
