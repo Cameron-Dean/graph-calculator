@@ -47,11 +47,14 @@ public class Edge<T extends Comparable<T>> implements Comparable<T> {
       @SuppressWarnings("unchecked")
       Edge<T> edge = (Edge<T>) o;
 
+      // if destination vertices are equal, compare source vertices
       if (Integer.parseInt(edge.getDestination().toString())
           == Integer.parseInt((String) this.destination)) {
         return Integer.parseInt((String) this.source)
             - Integer.parseInt(edge.getSource().toString());
       }
+
+      // compare destination vertices
       return Integer.parseInt((String) this.destination)
           - Integer.parseInt(edge.getDestination().toString());
     }
