@@ -1,7 +1,9 @@
 package nz.ac.auckland.se281.datastructures;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -21,11 +23,24 @@ public class Graph<T extends Comparable<T>> {
   /**
    * Creates a new graph.
    *
-   * @param vertices The set of vertices in the graph.
-   * @param edges The set of edges in the graph.
+   * @param vertices The set of vertices in the graph in numerical order.
+   * @param edges The set of edges in the graph in numerical order, sorted based on the destination
+   *     vertex first, then the source vertex.
    */
+  @SuppressWarnings("unchecked")
   public Graph(Set<T> vertices, Set<Edge<T>> edges) {
-    this.vertices = vertices;
+    // add ordered vertices
+    this.vertices = new LinkedHashSet<>();
+    List<Integer> order = new ArrayList<>();
+    for (T vertex : vertices) {
+      order.add(Integer.parseInt((String) vertex));
+    }
+    Collections.sort(order);
+    for (Integer vertex : order) {
+      this.vertices.add((T) vertex.toString());
+    }
+
+    // add ordered edges
     this.edges = new TreeSet<>(edges);
   }
 
@@ -37,7 +52,7 @@ public class Graph<T extends Comparable<T>> {
    * @return The set of root vertices in the graph.
    */
   public Set<T> getRoots() {
-    Set<T> roots = new TreeSet<>();
+    Set<T> roots = new LinkedHashSet<>();
 
     if (isEquivalence()) {
       for (T vertex : vertices) {
